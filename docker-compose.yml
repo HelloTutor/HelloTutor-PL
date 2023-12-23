@@ -1,0 +1,28 @@
+services:
+  database:
+    image: 'mysql:latest'
+    environment:
+      NATIVE_MODE: 'true'
+      MYSQL_DATABASE: 'HELLOTUTOR'
+      MYSQL_ROOT_PASSWORD: '0000'
+      MYSQL_USER: 'hellotutor'
+      MYSQL_PASSWORD: '0000'
+    ports:
+      - '3306'
+    networks:
+      - hello-net
+  front:
+    build: 'FE'
+    ports:
+      - '3000'
+    networks:
+      - hello-net
+  back:
+    build: 'BE'
+    ports:
+      - '8080:8080'
+    networks:
+      - hello-net
+networks:
+  hello-net:
+    driver: bridge
